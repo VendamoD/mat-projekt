@@ -1,0 +1,162 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.lightsaber {
+  height: 300px;
+  width: 150px;
+  background-color:blue;
+  display: inline;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(12, 50px);
+  grid-template-rows: repeat(5, 50px);
+  grid-gap: 10px;
+  width: 500px;
+  height: 400px;
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.toolbox {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.block {
+  border: 1px solid black;
+}
+
+.pentomino {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  border: 1px solid #999;
+  user-select: none;
+}
+
+.p0.block {
+  background: lightgray; 
+}
+
+.p1.block {
+  background: blue;
+}
+
+.p2.block {
+  background: cyan;
+}
+
+.p3.block {
+  background: purple;
+}
+
+.p4.block{
+  background: darkgreen;
+}
+
+.p5.block {
+  background: yellow;
+}
+
+.p6.block {
+  background: orange;
+}
+
+.p7.block {
+  background: red;
+}
+
+.p8.block {
+  background: pink;
+}
+
+.p9.block {
+  background: brown;
+}
+
+.p10.block {
+  background: grey;
+}
+
+.p11.block {
+  background: black;
+}
+
+.p12.block {
+  background: lightgreen;
+}
+
+/* .puzzle {
+  display: inline-block;
+} */
+
+.btn {
+  background: #fff;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 30px;
+}
+
+.popup {
+  background-color: #7e7e7e;
+  width: 190px;
+  height: 220px;
+  margin: auto;
+  text-align: center;
+  border-radius: 10px;
+  border: 3px solid blue
+}
+.popup#popup-prohra {
+  width: 500px;
+  height: 300px;
+  font-size: 60px;
+  font-weight: bold;
+
+}
+.popup p {
+  color: #fff;
+  font-size: 22px;
+}
+
+.puzzle {
+  padding-top: 50px;
+  padding-left: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    color: white;
+    background: black;
+  }
+}
