@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Box, Image, Text } from "@chakra-ui/react"
+import { Card, HStack, Image, Text} from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import Login from "../pages/Login"
 
@@ -24,21 +24,22 @@ export function Achievements() {
     setUserData(userData);
   }
 
-
-
-
   return (
     <>
-      <Box textAlign="center" display={"flex"} margin={5} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <HStack spacing="175px" textAlign="center" display={"flex"} margin={5} maxW='lm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
         {
           //@ts-ignore
-          userData ? userData.SaberPuzzle ? <Box><Image src="trophy.jpg"></Image><Text>Lightsaber Puzzle</Text></Box> : "" : ""
+          userData ? userData.SaberPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Světelné meče</Text></Card> : "" : ""
         }
         {
           //@ts-ignore
-          userData ? userData.WolfAndGoatPuzzle ? <Box><Image src="trophy.jpg"></Image><Text>Wolf and Goat Puzzle</Text></Box> : "Nesplnil jsi žádný hlavolam" : ""
+          userData ? userData.WolfAndGoatPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Vlk, koza a zelí</Text></Card> : "" : ""
         }
-      </Box>
+        {
+          //@ts-ignore
+          userData ? userData.PentominoPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Pentomino hlavolam</Text></Card> : "" : ""
+        }
+      </HStack>
     </>
   )
 }

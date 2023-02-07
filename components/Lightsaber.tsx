@@ -1,24 +1,42 @@
-import { Box, Tooltip } from "@chakra-ui/react"
+import {
+    Box,
+    Tooltip,
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Text,
+    HStack,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    LinkBox,
+    useDisclosure,
+} from "@chakra-ui/react"
 import { QuestionOutlineIcon } from '@chakra-ui/icons'
-import React, { useEffect } from "react"
+import NextLink from "next/link"
+import React from "react"
 import { useUserContext } from './userContext'
+
+
 
 export function Lightsaber() {
     let hodnoty = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     let zvoleneId = 0
     let pocetDvojek = 0;
-    const {updateSaber} = useUserContext()
-
-    
+    const { updateSaber } = useUserContext()
+    const modalLost = useDisclosure()
+    const modalWin = useDisclosure()
 
     const tah = (id: number) => {
-        const popupVyhra = document.getElementById("popup-vyhra") as HTMLElement;
-        const popupProhra = document.getElementById("popup-prohra") as HTMLElement;
         const popupSmer = document.getElementById("popup-smer") as HTMLElement;
         const popupNemuzes = document.getElementById("popup-nemuzes") as HTMLElement;
-
         zvoleneId = id;
-
         let moznostVlevo = false;
         let moznostVpravo = false;
 
@@ -50,6 +68,7 @@ export function Lightsaber() {
 
         if (moznostVlevo && moznostVpravo && hodnoty[id] == 1) {
             popupSmer.style.display = "block";
+            //console.log(popupSmer)
             return;
         } else {
             popupSmer.style.display = "none";
@@ -69,12 +88,10 @@ export function Lightsaber() {
     }
 
     const smer = (smer: boolean) => {
-        let preskoceneSirky = 0;
-        let konecneId = zvoleneId;
-        const popupVyhra = document.getElementById("popup-vyhra") as HTMLElement;
-        const popupProhra = document.getElementById("popup-prohra") as HTMLElement;
         const popupSmer = document.getElementById("popup-smer") as HTMLElement;
         const popupNemuzes = document.getElementById("popup-nemuzes") as HTMLElement;
+        let preskoceneSirky = 0;
+        let konecneId = zvoleneId;
         popupSmer.style.display = "none"
 
         //vpravo
@@ -147,7 +164,7 @@ export function Lightsaber() {
                 if (hodnoty[i] == 1) {
                     popupNemuzes.style.display = "none"
                     popupSmer.style.display = "none"
-                    popupProhra.style.display = "block"
+                    modalLost.onOpen()
                     //console.log("Jiz nemuzes hnout s zadnou sirkou");
                     break;
                 }
@@ -164,7 +181,7 @@ export function Lightsaber() {
         if (pocetDvojek == 5) {
             popupNemuzes.style.display = "none"
             popupSmer.style.display = "none"
-            popupVyhra.style.display = "block"
+            modalWin.onOpen()
             updateSaber()
             //console.log("Vyhral jsi");
 
@@ -172,21 +189,24 @@ export function Lightsaber() {
     }
 
     const reset = () => {
+        const popupSmer = document.getElementById("popup-smer") as HTMLElement;
+        const popupNemuzes = document.getElementById("popup-nemuzes") as HTMLElement;
         hodnoty = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         zvoleneId = 0
         pocetDvojek = 0
-        const popupVyhra = document.getElementById("popup-vyhra") as HTMLElement;
 
-        for(let i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             let lightsaber = document.getElementById(`${i}`) as HTMLImageElement
             lightsaber.src = "lightsaber.png"
         }
-        popupVyhra.style.display = "none"
+        popupNemuzes.style.display = "none"
+        popupSmer.style.display = "none"
     }
 
     return (
         <>
-            <div className="puzzle">
+            <Button marginLeft={5} marginTop={5} onClick={() => reset()}>Restart</Button>
+            <Box className="puzzle">
                 <img className="lightsaber" id="0" onClick={() => tah(0)} src="lightsaber.png"></img>
                 <img className="lightsaber" id="1" onClick={() => tah(1)} src="lightsaber.png"></img>
                 <img className="lightsaber" id="2" onClick={() => tah(2)} src="lightsaber.png"></img>
@@ -197,33 +217,65 @@ export function Lightsaber() {
                 <img className="lightsaber" id="7" onClick={() => tah(7)} src="lightsaber.png"></img>
                 <img className="lightsaber" id="8" onClick={() => tah(8)} src="lightsaber.png"></img>
                 <img className="lightsaber" id="9" onClick={() => tah(9)} src="lightsaber.png"></img>
-            </div>
+            </Box>
 
-            <Tooltip maxW="lm" label="Kliknutím na světelný meč skočíš o 3 meče dopředu. Tvým cílem je utvořit 5 křížků a tím vyřešit hlavolam." borderWidth='1px' borderRadius='lg'>
-                <Box backgroundColor="blackAlpha.200" marginLeft="50%" width="75px" borderRadius="10px" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box> 
+            <Tooltip maxW="lm" label="Kliknutím na světelný meč skočíš o 3 meče dopředu a utvoříš kříž. Tvým cílem je utvořit 5 křížků a tím vyřešit hlavolam." borderWidth='1px' borderRadius='lg'>
+                <Box marginLeft="50%" width="75px" borderRadius="3px" marginTop="10px" backgroundColor="#EDF2F7" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
             </Tooltip>
 
-            <div className="popup" id="popup-smer" style={{ display: "none" }}>
-                <p>Zvol si směr.</p>
-                <button className="btn" onClick={() => smer(false)}>Doleva</button>
-                <button className="btn" onClick={() => smer(true)}>Doprava</button>
-            </div>
+            <Card display="none" id="popup-smer" width="270px" margin="auto">
+                <CardBody >
+                    <Text>Zvol si směr kterým chceš hrát</Text>
+                    <HStack spacing="75px">
+                        <Button onClick={() => smer(false)} >Vlevo</Button>
+                        <Button onClick={() => smer(true)} >Vpravo</Button>
+                    </HStack>
+                </CardBody>
+            </Card>
 
-            <div className="popup" id="popup-nemuzes" style={{ display: "none" }}>
-                <p>S touto sirkou nemůžeš táhnout. Klikni na jinou sirku.</p>
-            </div>
+            <Card id="popup-nemuzes" display="none" width="410px" margin="auto">
+                <CardBody>
+                    <Text>S tímto mečem nemůžeš táhnout. Klikni na jiný meč.</Text>
+                </CardBody>
+            </Card>
 
-            <div className="popup" id="popup-vyhra" style={{ display: "none" }}>
-                <p>Úspěšně jsi dokončil hlavolam. Gratuluji!</p>
-                <p>Chceš hrát znovu ?</p>
-                <button className="btn" onClick={() => reset()}>Ano</button>
-                <button className="btn">Ne</button>
+            <Modal isOpen={modalWin.isOpen} onClose={modalWin.onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Gratuluji. Úspěšně jsi dokončil hlavolam.</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        Chceš pokračovat?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} >
+                            <LinkBox as={NextLink} href="./Home">
+                                NE
+                            </LinkBox>
+                        </Button>
+                        <Button variant='ghost' onClick={modalWin.onClose}>ANO</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
-            </div>
-
-            <div className="popup" id="popup-prohra" style={{ display: "none" }}>
-                <p>Je mi líto, ale bohužel jsi nevyřešil hlavolam.</p>
-            </div>
+            <Modal isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Je mi líto. Bohužel jsi nevyřešil hlavolam.</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        Chceš to zkusit znovu?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} >
+                            <LinkBox as={NextLink} href="./Home">
+                                NE
+                            </LinkBox>
+                        </Button>
+                        <Button variant='ghost' onClick={modalLost.onClose}>ANO</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </>
     )
 }

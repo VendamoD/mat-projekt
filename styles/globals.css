@@ -1,3 +1,6 @@
+
+/* Yarynator was here */
+
 html,
 body {
   padding: 0;
@@ -13,17 +16,71 @@ body {
 .lightsaber {
   height: 300px;
   width: 150px;
-  background-color:blue;
+  background-color:#EDF2F7;
   display: inline;
 }
 
+.river {
+  z-index: -1;
+}
+
+#wolf {
+  width: 125px;
+  height: 100px;
+}
+
+#cabbage {
+  width: 100px;
+  height: 80px;
+}
+
+#goat {
+  width: 125px;
+  height: 100px;
+}
+
+#boat {
+  width: 300px;
+  height: 275px;
+}
+
+.boatLeft {
+  transform: translate(135px, -650px);
+}
+
+.boatRight {
+  transform: translate(510px, -650px);
+}
+
+.goatLeft {
+  transform: translate(10px, -390px);
+}
+
+.goatRight {
+  transform: translate(740px, -390px);
+}
+
+.cabbageLeft {
+  transform: translate(25px, -410px);
+}
+
+.cabbageRight {
+  transform: translate(800px, -430px);
+}
+
+.wolfLeft {
+  transform: translate(100px, -320px);
+}
+
+.wolfRight {
+  transform: translate(720px, -350px);
+}
+
 #grid {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(12, 50px);
   grid-template-rows: repeat(5, 50px);
   grid-gap: 10px;
-  width: 500px;
-  height: 400px;
 }
 
 .draggable {

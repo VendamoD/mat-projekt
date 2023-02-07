@@ -3,13 +3,13 @@ import {
     Auth, createUserWithEmailAndPassword,
     fetchSignInMethodsForEmail, getAuth, onAuthStateChanged,
     signInWithEmailAndPassword, signOut,
+    updateEmail,
     User as FirebaseUser
 } from "firebase/auth";
 import { app } from "../firebase"
 import { getFirestore, doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
 
 const auth = getAuth();
-//const user = auth.currentUser;
 const db = getFirestore(app);
 let uid = "";
 
@@ -25,11 +25,16 @@ export const UserContext = createContext({
     saveUser: () => { },
     updateSaber: () => { },
     updateWolfAndGoat: () => { },
+    updatePentomino: () => { },
+    changeEmail: (email: string) => { },
+    getUser: () => { },
     getData: () => { },
 })
-
+let userData : any
 onAuthStateChanged(auth, (user) => {
     if (user) { uid = user.uid }
+    userData = auth.currentUser
+    //console.log(user)
 });
 
 export const UserContextProvider = (props: any) => {
@@ -46,6 +51,7 @@ export const UserContextProvider = (props: any) => {
         if (ret) {
             setIsLoggedIn(true);
             getData()
+            getUser()
         }
         return ret;
     }
@@ -72,6 +78,7 @@ export const UserContextProvider = (props: any) => {
             userId: uid,
             SaberPuzzle: false,
             WolfAndGoatPuzzle: false,
+            PentominoPuzzle: false,
         })
     }
     const updateSaber = () => {
@@ -83,6 +90,28 @@ export const UserContextProvider = (props: any) => {
         updateDoc(doc(db, "Users", uid), {
             WolfAndGoatPuzzle: true,
         })
+    }
+    const updatePentomino = () => {
+        updateDoc(doc(db, "Users", uid), {
+            PentominoPuzzle: true,
+        })
+    }
+    const changeEmail = async (email: string) => {
+        if (userData) {
+            console.log(userData)
+            updateEmail(userData, email)
+        } else {
+            console.log("no user")
+        }
+    }
+    const getUser = () => {
+        if (userData) {
+            //console.log(userData)
+            return userData
+        } else {
+            console.log("no user")
+        }
+
     }
 
     const getData = async () => {
@@ -101,6 +130,9 @@ export const UserContextProvider = (props: any) => {
             saveUser,
             updateSaber,
             updateWolfAndGoat,
+            updatePentomino,
+            changeEmail,
+            getUser,
             getData,
         }}>
             {props.children}

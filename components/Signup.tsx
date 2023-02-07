@@ -28,18 +28,18 @@ export function Signup() {
               <AlertDescription>Špatné heslo nebo email.</AlertDescription>
             </ChakraAlert > : <ChakraAlert marginTop={4} status='success'>
               <AlertIcon />
-              Registrace proběhla úspěšně. 
-                <Link color='blue.500' href='./Register'>
+              Registrace proběhla úspěšně.
+                <Link color='blue.500' href='./Login'>
                    Pokračuj zde.
                 </Link>
             </ChakraAlert> : ""
           }
           <FormControl paddingTop={5}>
-            <FormLabel>Email address</FormLabel>
+            <FormLabel>Email</FormLabel>
             <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>Heslo</FormLabel>
             <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
           <Button backgroundColor="blue.300" onClick={async (e) => {
@@ -54,6 +54,12 @@ export function Signup() {
             }
             setIsSent(true);
           }}>Registrovat</Button>
+          <Text>
+          Máš už vytvořená účet? {' '}
+          <Link color='blue.500' href='./Login'>
+            Přihlas se zde
+          </Link>
+        </Text>
         </Stack>
       </Center>
 

@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react"
 import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
+import { useRouter } from 'next/router'
+
 
 export function LoginComp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { login } = useUserContext();
+  const { login } = useUserContext();          
+  const router = useRouter()
+
 
   return (
     <Center>
@@ -19,11 +23,11 @@ export function LoginComp() {
           </ChakraAlert> : ""
         }
         <FormControl paddingTop={5}>
-          <FormLabel>Email address</FormLabel>
+          <FormLabel>Email</FormLabel>
           <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
         <FormControl>
-          <FormLabel>Password</FormLabel>
+          <FormLabel>Heslo</FormLabel>
           <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
         </FormControl>
         <Button backgroundColor="blue.300" onClick={async (e) => {
@@ -34,8 +38,10 @@ export function LoginComp() {
             setIsError(true);
           } else {
             setIsError(false);
+            router.push("./Home")
           }
-        }}>Login</Button>
+          
+        }}>Přihlásit se</Button>
         <Text>
           Nemáš ještě vytvořený účet?{' '}
           <Link color='blue.500' href='./Register'>

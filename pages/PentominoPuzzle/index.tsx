@@ -6,9 +6,9 @@ export default function Match() {
 
   const {isLoggedIn} = useUserContext()
 
-  // if(!isLoggedIn) {
-  //   return <Login/>
-  // }
+  if(!isLoggedIn) {
+    return <Login/>
+  }
 
   return (
     <>
