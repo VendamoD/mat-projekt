@@ -29,9 +29,9 @@ export function Signup() {
             </ChakraAlert > : <ChakraAlert marginTop={4} status='success'>
               <AlertIcon />
               Registrace proběhla úspěšně.
-                <Link color='blue.500' href='./Login'>
-                   Pokračuj zde.
-                </Link>
+              <Link color='blue.500' href='./Login'>
+                Pokračuj zde.
+              </Link>
             </ChakraAlert> : ""
           }
           <FormControl paddingTop={5}>
@@ -55,43 +55,13 @@ export function Signup() {
             setIsSent(true);
           }}>Registrovat</Button>
           <Text>
-          Máš už vytvořená účet? {' '}
-          <Link color='blue.500' href='./Login'>
-            Přihlas se zde
-          </Link>
-        </Text>
+            Máš už vytvořená účet? {' '}
+            <Link color='blue.500' href='./Login'>
+              Přihlas se zde
+            </Link>
+          </Text>
         </Stack>
       </Center>
-
-
-
-
-      {/* <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={submit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" value={email} onChange={(e) =>setEmail(e.target.value)} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Sign Up
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account?
-      </div> */}
     </>
   )
 }

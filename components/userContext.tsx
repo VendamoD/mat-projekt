@@ -4,6 +4,7 @@ import {
     fetchSignInMethodsForEmail, getAuth, onAuthStateChanged,
     signInWithEmailAndPassword, signOut,
     updateEmail,
+    updatePassword,
     User as FirebaseUser
 } from "firebase/auth";
 import { app } from "../firebase"
@@ -26,11 +27,13 @@ export const UserContext = createContext({
     updateSaber: () => { },
     updateWolfAndGoat: () => { },
     updatePentomino: () => { },
-    changeEmail: (email: string) => { },
+    updateEternity: () => { },
+    changeEmail: (email: string): Promise<boolean> => { return Promise.resolve(Date.now()).then(() => { return false }) },
+    changePassword: (password: string): Promise<boolean> => { return Promise.resolve(Date.now()).then(() => { return false }) },
     getUser: () => { },
     getData: () => { },
 })
-let userData : any
+let userData: any
 onAuthStateChanged(auth, (user) => {
     if (user) { uid = user.uid }
     userData = auth.currentUser
@@ -79,6 +82,7 @@ export const UserContextProvider = (props: any) => {
             SaberPuzzle: false,
             WolfAndGoatPuzzle: false,
             PentominoPuzzle: false,
+            EternityPuzzle: false,
         })
     }
     const updateSaber = () => {
@@ -96,17 +100,40 @@ export const UserContextProvider = (props: any) => {
             PentominoPuzzle: true,
         })
     }
-    const changeEmail = async (email: string) => {
+    const updateEternity = () => {
+        updateDoc(doc(db, "Users", uid), {
+            EternityPuzzle: true,
+        })
+    }
+    const changeEmail = async (email: string): Promise<boolean> => {
+        let ret: boolean = false;
         if (userData) {
-            console.log(userData)
-            updateEmail(userData, email)
+            await updateEmail(userData, email).then(() => {
+                ret = true
+                if (email == "") ret = false
+            }).catch((err) => {
+                ret = false
+            })
         } else {
             console.log("no user")
         }
+        return ret;
+    }
+    const changePassword = async (password: string): Promise<boolean> => {
+        let ret: boolean = false;
+        if (userData) {
+            await updatePassword(userData, password).then(() => {
+                ret = true
+            }).catch((err) => {
+                ret = false
+            })
+        } else {
+            console.log("no user")
+        }
+        return ret;
     }
     const getUser = () => {
         if (userData) {
-            //console.log(userData)
             return userData
         } else {
             console.log("no user")
@@ -131,7 +158,9 @@ export const UserContextProvider = (props: any) => {
             updateSaber,
             updateWolfAndGoat,
             updatePentomino,
+            updateEternity,
             changeEmail,
+            changePassword,
             getUser,
             getData,
         }}>

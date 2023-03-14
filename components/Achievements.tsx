@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Card, HStack, Image, Text} from "@chakra-ui/react"
+import { Card, HStack, Image, Text } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import Login from "../pages/Login"
 
@@ -38,6 +38,12 @@ export function Achievements() {
         {
           //@ts-ignore
           userData ? userData.PentominoPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Pentomino hlavolam</Text></Card> : "" : ""
+        }
+      </HStack>
+      <HStack spacing="175px" textAlign="center" display={"flex"} margin={5} maxW='lm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        {
+          //@ts-ignore
+          userData ? userData.EternityPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Eternity hlavolam</Text></Card> : "" : ""
         }
       </HStack>
     </>

@@ -16,6 +16,7 @@ import {
     LinkBox,
     useDisclosure,
     Tooltip,
+    Center,
 } from "@chakra-ui/react"
 import { useUserContext } from '../components/userContext'
 import NextLink from "next/link"
@@ -182,34 +183,39 @@ export function WolfAndGoat() {
         boat.className = "boatLeft"
     }
 
+    function close() {
+        modalWin.onClose();
+        modalLost.onClose()
+        restart()
+    }
+
     return (
         <>
 
-            <Tooltip maxW="lm" label="Tvým cílem je dostat na druhý břeh vlka, kozu a zelí. Ale dej pozor, pokud necháš vlka osamotě s kozou, tak ji vlk sežere. A pokud necháš o samotě kozu se zelím, tak koza sní zelí." borderWidth='1px' borderRadius='lg'>
-                <Box marginLeft="50%" width="75px" borderRadius="1px" marginTop="10px" backgroundColor="#EDF2F7" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
-            </Tooltip>
-
-            <Box height={"600px"} width={"900px"} marginLeft="auto" marginRight="auto" display="block" paddingTop="10px">
-                <Image className="river" width="100%" height="100%" src="river.jpg" position="relative" ></Image>
-                <Image className="wolfLeft" id="wolf" src="cartoonWolf.png" ></Image>
-                <Image className="goatLeft" id="goat" src="cartoonGoat.png"></Image>
-                <Image className="cabbageLeft" id="cabbage" src="cartoonCabbage.png"></Image>
-                <Image className="boatLeft" src="boat.png" id="boat"></Image>
-
+            <Box width={"60vw"} position="relative" marginLeft="auto" marginRight="auto" display="block" paddingTop="10px">
+                <Image className="wolfLeft" id="wolf" src="cartoonWolf.png"></Image>
+                <Image className="goatLeft" id="goat" src="cartoonGoat.png" position="absolute"></Image>
+                <Image className="cabbageLeft" id="cabbage" src="cartoonCabbage.png" position="absolute"></Image>
+                <Image className="boatLeft" src="boat.png" id="boat" position="absolute" ></Image>
+                <Image width={"60vw"} className="river" src="river.jpg" ></Image>
             </Box>
-            <HStack spacing="10px" paddingLeft="600px" paddingTop="15px">
-                <Button onClick={() => moveGoat()}>Koza </Button>
-                <Button onClick={() => moveWolf()}>Vlk </Button>
-                <Button onClick={() => moveCabbage()}>Zelí </Button>
-                <Button onClick={() => moveEmpty()}>Přejeď prázdný</Button>
-                <Button onClick={() => restart()}>Reset</Button>
-            </HStack>
+            <Center>
+                <HStack spacing={{ base: "1vw" }} paddingTop="15px">
+                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveGoat()}>Koza </Button>
+                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveWolf()}>Vlk </Button>
+                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveCabbage()}>Zelí </Button>
+                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveEmpty()}>Prázdný</Button>
+                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => restart()}>Reset</Button>
+                    <Tooltip label="Tvým cílem je dostat na druhý břeh vlka, kozu a zelí. Ale dej pozor, pokud necháš vlka osamotě s kozou, tak ji vlk sežere. A pokud necháš o samotě kozu se zelím, tak koza sní zelí." borderWidth='1px' borderRadius='lg'>
+                        <Box fontSize={{ base: "1.3rem" }} marginLeft="50%" borderRadius="1px" marginTop="10px" text-align="center"><QuestionOutlineIcon /></Box>
+                    </Tooltip>
 
-            <Modal isOpen={modalWin.isOpen} onClose={modalWin.onClose}>
+                </HStack>
+            </Center>
+            <Modal closeOnOverlayClick={false} isOpen={modalWin.isOpen} onClose={modalWin.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Gratuluji. Úspěšně jsi dokončil hlavolam.</ModalHeader>
-                    <ModalCloseButton />
                     <ModalBody>
                         Chceš pokračovat?
                     </ModalBody>
@@ -219,16 +225,14 @@ export function WolfAndGoat() {
                                 NE
                             </LinkBox>
                         </Button>
-                        <Button variant='ghost' onClick={modalWin.onClose}>ANO</Button>
+                        <Button variant='ghost' onClick={() => close()}>ANO</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-
-            <Modal isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Je mi líto. Bohužel jsi nevyřešil hlavolam.</ModalHeader>
-                    <ModalCloseButton />
                     <ModalBody>
                         Chceš to zkusit znovu?
                     </ModalBody>
@@ -238,7 +242,7 @@ export function WolfAndGoat() {
                                 NE
                             </LinkBox>
                         </Button>
-                        <Button variant='ghost' onClick={modalLost.onClose}>ANO</Button>
+                        <Button variant='ghost' onClick={() => close()}>ANO</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

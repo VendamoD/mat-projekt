@@ -17,6 +17,8 @@ import {
     ModalCloseButton,
     LinkBox,
     useDisclosure,
+    Image,
+    Center
 } from "@chakra-ui/react"
 import { QuestionOutlineIcon } from '@chakra-ui/icons'
 import NextLink from "next/link"
@@ -183,7 +185,6 @@ export function Lightsaber() {
             popupSmer.style.display = "none"
             modalWin.onOpen()
             updateSaber()
-            //console.log("Vyhral jsi");
 
         }
     }
@@ -202,25 +203,31 @@ export function Lightsaber() {
         popupNemuzes.style.display = "none"
         popupSmer.style.display = "none"
     }
+    function close() {
+        modalWin.onClose();
+        modalLost.onClose()
+        reset()
+    }
 
     return (
         <>
-            <Button marginLeft={5} marginTop={5} onClick={() => reset()}>Restart</Button>
-            <Box className="puzzle">
-                <img className="lightsaber" id="0" onClick={() => tah(0)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="1" onClick={() => tah(1)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="2" onClick={() => tah(2)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="3" onClick={() => tah(3)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="4" onClick={() => tah(4)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="5" onClick={() => tah(5)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="6" onClick={() => tah(6)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="7" onClick={() => tah(7)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="8" onClick={() => tah(8)} src="lightsaber.png"></img>
-                <img className="lightsaber" id="9" onClick={() => tah(9)} src="lightsaber.png"></img>
-            </Box>
-
-            <Tooltip maxW="lm" label="Kliknutím na světelný meč skočíš o 3 meče dopředu a utvoříš kříž. Tvým cílem je utvořit 5 křížků a tím vyřešit hlavolam." borderWidth='1px' borderRadius='lg'>
-                <Box marginLeft="50%" width="75px" borderRadius="3px" marginTop="10px" backgroundColor="#EDF2F7" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
+            <Button backgroundColor="blue.500" marginLeft={5} marginTop={5} onClick={() => reset()} >Restart</Button>
+            <Center>
+                <Box className="puzzle">
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="0" onClick={() => tah(0)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="1" onClick={() => tah(1)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="2" onClick={() => tah(2)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="3" onClick={() => tah(3)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="4" onClick={() => tah(4)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="5" onClick={() => tah(5)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="6" onClick={() => tah(6)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="7" onClick={() => tah(7)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="8" onClick={() => tah(8)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" width={{ base: "9vw" }} id="9" onClick={() => tah(9)} src="lightsaber.png"></Image>
+                </Box>
+            </Center>
+            <Tooltip width={{ base: "20vw" }} label="Kliknutím na světelný meč skočíš o 3 meče dopředu a utvoříš kříž. Tvým cílem je utvořit 5 křížků a tím vyřešit hlavolam." borderWidth='1px' borderRadius='lg'>
+                <Box fontSize={{ base: "20px" }} backgroundColor="blue.500" marginLeft="50%" width="100px" borderRadius="3px" marginTop="10px" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
             </Tooltip>
 
             <Card display="none" id="popup-smer" width="270px" margin="auto">
@@ -239,13 +246,12 @@ export function Lightsaber() {
                 </CardBody>
             </Card>
 
-            <Modal isOpen={modalWin.isOpen} onClose={modalWin.onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={modalWin.isOpen} onClose={modalWin.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Gratuluji. Úspěšně jsi dokončil hlavolam.</ModalHeader>
-                    <ModalCloseButton />
                     <ModalBody>
-                        Chceš pokračovat?
+                        Chceš hrát znovu?
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} >
@@ -253,16 +259,15 @@ export function Lightsaber() {
                                 NE
                             </LinkBox>
                         </Button>
-                        <Button variant='ghost' onClick={modalWin.onClose}>ANO</Button>
+                        <Button variant='ghost' onClick={() => close()}>ANO</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
 
-            <Modal isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Je mi líto. Bohužel jsi nevyřešil hlavolam.</ModalHeader>
-                    <ModalCloseButton />
                     <ModalBody>
                         Chceš to zkusit znovu?
                     </ModalBody>
@@ -272,7 +277,7 @@ export function Lightsaber() {
                                 NE
                             </LinkBox>
                         </Button>
-                        <Button variant='ghost' onClick={modalLost.onClose}>ANO</Button>
+                        <Button variant='ghost' onClick={() => close()}>ANO</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
