@@ -26,24 +26,22 @@ export function Achievements() {
 
   return (
     <>
-      <HStack spacing="175px" textAlign="center" display={"flex"} margin={5} maxW='lm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <HStack spacing="1rem" textAlign="center" display={"flex"} margin={5} borderWidth='1px' borderRadius='lg' overflow='hidden'>
         {
           //@ts-ignore
-          userData ? userData.SaberPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Světelné meče</Text></Card> : "" : ""
+          userData ? userData.SaberPuzzle ? <Card><Image width="40vw" src="trophy.png"></Image><Text fontSize={{ base: "1.1rem" }}>Světelné meče</Text></Card> : "" : ""
         }
         {
           //@ts-ignore
-          userData ? userData.WolfAndGoatPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Vlk, koza a zelí</Text></Card> : "" : ""
+          userData ? userData.WolfAndGoatPuzzle ? <Card><Image width="40vw" src="trophy.png"></Image><Text fontSize={{ base: "1.1rem" }}>Vlk, koza a zelí</Text></Card> : "" : ""
         }
         {
           //@ts-ignore
-          userData ? userData.PentominoPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Pentomino hlavolam</Text></Card> : "" : ""
+          userData ? userData.PentominoPuzzle ? <Card><Image width="40vw" src="trophy.png"></Image><Text fontSize={{ base: "1.1rem" }}>Pentomino hlavolam</Text></Card> : "" : ""
         }
-      </HStack>
-      <HStack spacing="175px" textAlign="center" display={"flex"} margin={5} maxW='lm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
         {
           //@ts-ignore
-          userData ? userData.EternityPuzzle ? <Card maxW='sm'><Image src="trophy.png"></Image><Text>Eternity hlavolam</Text></Card> : "" : ""
+          userData ? userData.EternityPuzzle ? <Card><Image width="40vw" src="trophy.png"></Image><Text fontSize={{ base: "1.1rem" }}>Eternity hlavolam</Text></Card> : "" : ""
         }
       </HStack>
     </>

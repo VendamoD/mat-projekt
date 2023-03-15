@@ -20,7 +20,6 @@ export function EmailChange() {
 
         }
     }
-    //console.log(userData)
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -46,7 +45,7 @@ export function EmailChange() {
                     <FormLabel>Zadej nový email</FormLabel>
                     <Input id="email" type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} isRequired />
                     <Center>
-                        <Button onClick={async (e) => {
+                        <Button backgroundColor="blue.300" onClick={async (e) => {
                             e.preventDefault()
                             const emailChangeErr = await changeEmail(newEmail)
                             if (!emailChangeErr) {

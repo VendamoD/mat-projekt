@@ -211,31 +211,31 @@ export function Lightsaber() {
 
     return (
         <>
-            <Button backgroundColor="blue.500" marginLeft={5} marginTop={5} onClick={() => reset()} >Restart</Button>
+            <Button backgroundColor="blue.300" marginLeft={5} marginTop={5} onClick={() => reset()} >Restart</Button>
             <Center>
                 <Box className="puzzle">
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="0" onClick={() => tah(0)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="1" onClick={() => tah(1)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="2" onClick={() => tah(2)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="3" onClick={() => tah(3)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="4" onClick={() => tah(4)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="5" onClick={() => tah(5)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="6" onClick={() => tah(6)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="7" onClick={() => tah(7)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="8" onClick={() => tah(8)} src="lightsaber.png"></Image>
-                    <Image className="lightsaber" width={{ base: "9vw" }} id="9" onClick={() => tah(9)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="0" onClick={() => tah(0)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="1" onClick={() => tah(1)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="2" onClick={() => tah(2)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="3" onClick={() => tah(3)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="4" onClick={() => tah(4)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="5" onClick={() => tah(5)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="6" onClick={() => tah(6)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="7" onClick={() => tah(7)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="8" onClick={() => tah(8)} src="lightsaber.png"></Image>
+                    <Image className="lightsaber" id="9" onClick={() => tah(9)} src="lightsaber.png"></Image>
                 </Box>
             </Center>
             <Tooltip width={{ base: "20vw" }} label="Kliknutím na světelný meč skočíš o 3 meče dopředu a utvoříš kříž. Tvým cílem je utvořit 5 křížků a tím vyřešit hlavolam." borderWidth='1px' borderRadius='lg'>
-                <Box fontSize={{ base: "20px" }} backgroundColor="blue.500" marginLeft="50%" width="100px" borderRadius="3px" marginTop="10px" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
+                <Box fontSize={{ base: "20px" }} backgroundColor="blue.300" marginLeft="50%" width="100px" borderRadius="3px" marginTop="10px" textAlign="center"> Jak hrát    <QuestionOutlineIcon /></Box>
             </Tooltip>
 
             <Card display="none" id="popup-smer" width="270px" margin="auto">
                 <CardBody >
                     <Text>Zvol si směr kterým chceš hrát</Text>
                     <HStack spacing="75px">
-                        <Button onClick={() => smer(false)} >Vlevo</Button>
-                        <Button onClick={() => smer(true)} >Vpravo</Button>
+                        <Button backgroundColor="blue.300" onClick={() => smer(false)} >Vlevo</Button>
+                        <Button backgroundColor="blue.300" onClick={() => smer(true)} >Vpravo</Button>
                     </HStack>
                 </CardBody>
             </Card>

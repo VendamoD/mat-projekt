@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import NextLink from "next/link"
-import { Box, Image, LinkBox, Text, HStack, Button, Link, Grid, GridItem, extendTheme } from "@chakra-ui/react"
+import { Box, Image, LinkBox, Text, HStack, Button, Link, Grid, GridItem, extendTheme, Center } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import Login from "../pages/Login"
 
@@ -22,56 +22,56 @@ export function Homepage() {
     if (isLoggedIn) {
       getUserData()
     }
-  }, [isLoggedIn])
-  const windowWidth = 0
-  useEffect(() => {
-    console.log(window.innerWidth)
-  }, [window.onresize])
+  })
 
-  const breakpoints = {
-    sm: ''
-  }
   return (
     <>
       <Grid paddingLeft="20px" margin="auto" templateColumns={{ xl: "repeat(3, 1fr)", lg: "repeat(2, 1fr)", md: "repeat(2, 1fr)", sm: "repeat(1, 1fr)", }}>
-        <GridItem p={5} textAlign="center" width="sm" height="lm" borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        <GridItem p={7} textAlign="center" width="sm" borderWidth='1px' borderRadius='lg' overflow='hidden'>
           <LinkBox as={NextLink} href="./LightsaberPuzzle">
             {
               //@ts-ignore
               userData ? userData.SaberPuzzle ? "Hotovo" : "" : ""
             }
-            <Image src="lightsaberThumbnail.jpg" />
+            <Center>
+              <Image width="20vw" src="lightsaberThumbnail.jpg" />
+            </Center>
             <Text>Světelné meče</Text>
           </LinkBox>
         </GridItem>
-        <GridItem p={5} textAlign="center" width="sm" height="lm" borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        <GridItem p={4} textAlign="center" width="sm" borderWidth='1px' borderRadius='lg' overflow='hidden'>
           <LinkBox as={NextLink} href="./WolfAndGoatPuzzle">
             {
               //@ts-ignore
               userData ? userData.WolfAndGoatPuzzle ? "Hotovo" : "" : ""
             }
-            <Image height="125px" width="350px" float="left" src="GoatAndWolf.png" />
+            <Center>
+              <Image width="15vw" float="left" src="GoatAndWolf.png" />
+            </Center>
             <Text>Vlk, koza a zelí</Text>
-
           </LinkBox>
         </GridItem>
-        <GridItem p={5} textAlign="center" width="sm" height="lm" float="left" borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        <GridItem p={5} textAlign="center" width="sm" float="left" borderWidth='1px' borderRadius='lg' overflow='hidden'>
           <LinkBox as={NextLink} href="./PentominoPuzzle">
             {
               //@ts-ignore
               userData ? userData.PentominoPuzzle ? "Hotovo" : "" : ""
             }
-            <Image height="125px" width="350px" src="pentominoThumbnail.png" />
+            <Center>
+              <Image width="20vw" src="pentominoThumbnail.png" />
+            </Center>
             <Text>Pentomino hlavolam</Text>
           </LinkBox>
         </GridItem>
-        <GridItem p={5} textAlign="center" width="sm" height="lm" float="left" borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        <GridItem p={5} textAlign="center" width="sm" float="left" borderWidth='1px' borderRadius='lg' overflow='hidden'>
           <LinkBox as={NextLink} href="./EternityPuzzle">
             {
               //@ts-ignore
               userData ? userData.EternityPuzzle ? "Hotovo" : "" : ""
             }
-            <Image height="125px" width="350px" src="pentominoThumbnail.png" />
+            <Center>
+              <Image width="20vw" src="eternityThumbnail.png" />
+            </Center>
             <Text>Eternity hlavolam</Text>
           </LinkBox>
         </GridItem>

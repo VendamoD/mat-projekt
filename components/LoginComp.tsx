@@ -8,7 +8,7 @@ export function LoginComp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { login } = useUserContext();          
+  const { login } = useUserContext();
   const router = useRouter()
 
 
@@ -33,14 +33,13 @@ export function LoginComp() {
         <Button backgroundColor="blue.300" onClick={async (e) => {
           e.preventDefault();
           const loginErr = await login(email, password)
-          console.log(loginErr)
           if (!loginErr) {
             setIsError(true);
           } else {
             setIsError(false);
             router.push("./Home")
           }
-          
+
         }}>Přihlásit se</Button>
         <Text>
           Nemáš ještě vytvořený účet?{' '}

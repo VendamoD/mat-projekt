@@ -10,6 +10,8 @@ html, body {
 }
 
 .lightsaber {
+  width: 9vw;
+  height: 30vh;
   background-color:#EDF2F7;
   display: inline;
 }
@@ -86,6 +88,10 @@ html, body {
   grid-gap: 10px;
 }
 
+#gridEternity {
+  display: inline-grid;
+}
+
 .draggable {
   cursor: grab;
 }
@@ -99,12 +105,13 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-  padding-left: 5vw;
+  padding-left: 2vw;
   width: 100vw;
 }
 
 .block {
   border: 1px solid black;
+  background: lightgray; 
 }
 
 .pentomino {
@@ -112,7 +119,7 @@ html, body {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   flex-wrap: wrap;
-  width: 10vw;
+  width: 8vw;
   height: 10vh;
   background: transparent;
   border: 1px solid #999;
@@ -171,10 +178,6 @@ html, body {
   background: lightgreen;
 }
 
-/* .puzzle {
-  display: inline-block;
-} */
-
 .btn {
   background: #fff;
   border: 0;
@@ -183,27 +186,6 @@ html, body {
   font-size: 22px;
   font-weight: 500;
   border-radius: 30px;
-}
-
-.popup {
-  background-color: #7e7e7e;
-  width: 190px;
-  height: 220px;
-  margin: auto;
-  text-align: center;
-  border-radius: 10px;
-  border: 3px solid blue
-}
-.popup#popup-prohra {
-  width: 500px;
-  height: 300px;
-  font-size: 60px;
-  font-weight: bold;
-
-}
-.popup p {
-  color: #fff;
-  font-size: 22px;
 }
 
 .puzzle {

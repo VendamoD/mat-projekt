@@ -37,7 +37,7 @@ export function Dashboard() {
     if (isLoggedIn) {
       getUserData()
     }
-  }, [isLoggedIn])
+  })
 
   return (
     <>
@@ -51,7 +51,7 @@ export function Dashboard() {
             nebo{' '}
             <Link as={NextLink} color='blue.500' href="./Password" >heslo</Link>?
           </Text>
-          <Button onClick={logout}>
+          <Button backgroundColor="blue.300" onClick={logout}>
             Odhlásit se
           </Button>
         </Stack>

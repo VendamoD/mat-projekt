@@ -14,6 +14,7 @@ import {
     HStack,
     Tooltip,
     Center,
+    Grid,
 } from "@chakra-ui/react";
 import NextLink from "next/link"
 import React, { useEffect, useState } from "react"
@@ -148,10 +149,10 @@ export function Pentomino() {
     return (
         <>
             <Tooltip width="20vw" label="Pomocí kláves R a F otáčej dílky a potom je přetáhni do hracího pole. Tvým úkolem je poskládat do pole všechny díky tak, aby ti žádný nezůstal." borderWidth='1px' borderRadius='lg'>
-                <Box marginLeft="50%" minWidth="6rem" fontSize={{ base: "20px" }} width="8vw" borderRadius="1px" marginTop="10px" backgroundColor="blue.500" textAlign="center"> Jak hrát    <QuestionOutlineIcon /></Box>
+                <Box marginLeft="50%" minWidth="6rem" fontSize={{ base: "20px" }} width="8vw" borderRadius="1px" marginTop="10px" backgroundColor="blue.300" textAlign="center"> Jak hrát    <QuestionOutlineIcon /></Box>
             </Tooltip>
             <Center>
-                <Box width="50vw" height="50vh" padding={5} id="grid" style={{ gridTemplateColumns: `repeat(${playArea[0].length}, 1fr)`, gridTemplateRows: `repeat(${playArea.length}, 1fr)` }}>
+                <Grid width="50vw" height="50vh" padding={5} id="grid" style={{ gridTemplateColumns: `repeat(${playArea[0].length}, 1fr)`, gridTemplateRows: `repeat(${playArea.length}, 1fr)` }}>
                     {displayArea.map((row, rowIndex) => row.map((cell, i) => (
                         <div key={i} draggable="true"
                             className={"block p" + cell}
@@ -163,7 +164,7 @@ export function Pentomino() {
                             onDragOver={e => e.preventDefault()}>
                         </div>
                     )))}
-                </Box>
+                </Grid>
             </Center>
             <Box className="toolbox" >
                 {pentominoes.map((pentomino, i) => (
@@ -177,11 +178,11 @@ export function Pentomino() {
                                 {pentomino.map((row, indexRow) => row.map((cell, cellColumn) => (
                                     <>
                                         {!!cell &&
-                                            <div
+                                            <Box
                                                 className={"block p" + (i + 1)}
                                                 style={{ gridRow: indexRow + 1, gridColumn: cellColumn + 1 }}
                                                 key={`px${i};${indexRow};${cellColumn}`}>
-                                            </div>
+                                            </Box>
                                         }
                                     </>
                                 )))}
@@ -207,7 +208,7 @@ export function Pentomino() {
                 </ModalContent>
             </Modal>
             <HStack paddingLeft={"50%"} paddingTop="10px">
-                <Button backgroundColor="blue.500" fontSize={{ base: "24px" }} onClick={() => reset()}>restart</Button>
+                <Button backgroundColor="blue.300" fontSize={{ base: "24px" }} onClick={() => reset()}>restart</Button>
             </HStack>
         </>
     )

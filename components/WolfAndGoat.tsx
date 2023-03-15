@@ -201,11 +201,11 @@ export function WolfAndGoat() {
             </Box>
             <Center>
                 <HStack spacing={{ base: "1vw" }} paddingTop="15px">
-                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveGoat()}>Koza </Button>
-                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveWolf()}>Vlk </Button>
-                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveCabbage()}>Zelí </Button>
-                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => moveEmpty()}>Prázdný</Button>
-                    <Button backgroundColor="blue.500" fontSize={{ base: "1.3rem" }} onClick={() => restart()}>Reset</Button>
+                    <Button backgroundColor="blue.300" fontSize={{ base: "1.3rem" }} onClick={() => moveGoat()}>Koza </Button>
+                    <Button backgroundColor="blue.300" fontSize={{ base: "1.3rem" }} onClick={() => moveWolf()}>Vlk </Button>
+                    <Button backgroundColor="blue.300" fontSize={{ base: "1.3rem" }} onClick={() => moveCabbage()}>Zelí </Button>
+                    <Button backgroundColor="blue.300" fontSize={{ base: "1.3rem" }} onClick={() => moveEmpty()}>Prázdný</Button>
+                    <Button backgroundColor="blue.300" fontSize={{ base: "1.3rem" }} onClick={() => restart()}>Reset</Button>
                     <Tooltip label="Tvým cílem je dostat na druhý břeh vlka, kozu a zelí. Ale dej pozor, pokud necháš vlka osamotě s kozou, tak ji vlk sežere. A pokud necháš o samotě kozu se zelím, tak koza sní zelí." borderWidth='1px' borderRadius='lg'>
                         <Box fontSize={{ base: "1.3rem" }} marginLeft="50%" borderRadius="1px" marginTop="10px" text-align="center"><QuestionOutlineIcon /></Box>
                     </Tooltip>

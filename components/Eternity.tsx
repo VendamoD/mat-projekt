@@ -499,36 +499,36 @@ export function Eternity() {
 
   return (
     <>
-      <Grid padding={5} paddingLeft="550px" id="grid" style={{ gridTemplateColumns: `repeat(${playArea[0].length}, 50px)`, gridTemplateRows: `repeat(${playArea.length}, 50px)` }}>
-        {playArea.map((row, rowIndex) => row.map((cell, i) => (
-          <Box key={i} id={`${cell}`} draggable="true"
-            className="block"
-            onDrop={drop(rowIndex, i)}
-            onDragStart={dragStart}
-            onContextMenu={(e) => {
-              e.preventDefault()
-              takeOut(cell)
-            }}
-            onDragOver={e => e.preventDefault()}>
-            {!!cell && <img src={`eternity/eternity${cell}.png`} style={{ transform: `rotate(${(eternities.find(x => x.id == cell)?.rotated ?? 0) * 90}deg)` }} />}
-          </Box>
-        )))}
-      </Grid>
-
-      <Box paddingLeft="150px" padding={2} className="toolbox">
+      <Center>
+        <Grid paddingTop={5} id="gridEternity" style={{ gridTemplateColumns: `repeat(${playArea[0].length}, 50px)`, gridTemplateRows: `repeat(${playArea.length}, 50px)` }}>
+          {playArea.map((row, rowIndex) => row.map((cell, i) => (
+            <Box key={i} id={`${cell}`} draggable="true"
+              className="block"
+              onDrop={drop(rowIndex, i)}
+              onDragStart={dragStart}
+              onContextMenu={(e) => {
+                e.preventDefault()
+                takeOut(cell)
+              }}
+              onDragOver={e => e.preventDefault()}>
+              {!!cell && <img src={`eternity/eternity${cell}.png`} style={{ transform: `rotate(${(eternities.find(x => x.id == cell)?.rotated ?? 0) * 90}deg)` }} />}
+            </Box>
+          )))}
+        </Grid>
+      </Center>
+      <Box paddingLeft="2vw" padding={2} className="toolbox">
         {eternities.filter(x => !x.placed).map(x => (
-          <Image key={x.id} src={`eternity/eternity${x.id}.png`} style={{ transform: `rotate(${x.rotated * 90}deg)` }} draggable="true" id={`${x.id}`}
+          <Image width={{ xl: "3vw", md: "4vw", base: "8vw" }} key={x.id} src={`eternity/eternity${x.id}.png`} style={{ transform: `rotate(${x.rotated * 90}deg)` }} draggable="true" id={`${x.id}`}
             onDragStart={dragStart}
             tabIndex={x.id}
             onMouseEnter={e => e.currentTarget.focus()}
             onKeyDown={e => keyDown(e, x)} />
         ))}
       </Box>
-
       <Center>
-        <Button backgroundColor="blue.500" onClick={() => restart()} >Restart</Button>
-        <Tooltip maxW="lm" label="Tvým úkolem je poskládat dílky správnými stranami k sobě, tak aby vytvořili obrázek. Dílky můžeš otáčet pomocí klávesy R a pokud klikneš na položený dílek pravým tlačítkem, tak jej vyndáš z pole ven." borderWidth='1px' borderRadius='lg'>
-          <Box backgroundColor="blue.500" fontSize={{ base: "20px" }} marginLeft={"10px"} width="100px" borderRadius="1px" marginTop="10px" text-align="center"> Jak hrát    <QuestionOutlineIcon /></Box>
+        <Button backgroundColor="blue.300" onClick={() => restart()} >Restart</Button>
+        <Tooltip width="40vw" label="Tvým úkolem je poskládat dílky správnými stranami k sobě, tak aby vytvořili obrázek. Dílky můžeš otáčet pomocí klávesy R a pokud klikneš na položený dílek pravým tlačítkem, tak jej vyndáš z pole ven." borderWidth='1px' borderRadius='lg'>
+          <Box backgroundColor="blue.300" fontSize={{ base: "20px" }} marginLeft={"10px"} width="100px" borderRadius="1px" marginTop="10px" textAlign="center"> Jak hrát    <QuestionOutlineIcon /></Box>
         </Tooltip>
       </Center>
 

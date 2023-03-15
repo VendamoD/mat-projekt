@@ -44,7 +44,7 @@ export function PasswordChange() {
                     <FormLabel>Zadej nové heslo</FormLabel>
                     <Input id="password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} isRequired />
                     <Center>
-                        <Button onClick={async (e) => {
+                        <Button backgroundColor="blue.300" onClick={async (e) => {
                             e.preventDefault()
                             const emailChangeErr = await changePassword(newPassword)
                             if (!emailChangeErr) {
