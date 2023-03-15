@@ -120,7 +120,7 @@ html, body {
   grid-template-rows: repeat(5, 1fr);
   flex-wrap: wrap;
   width: 8vw;
-  height: 10vh;
+  height: 14vh;
   background: transparent;
   border: 1px solid #999;
   user-select: none;
