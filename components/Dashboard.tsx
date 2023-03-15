@@ -35,7 +35,7 @@ export function Dashboard() {
 
   useEffect(() => {
     getUserData()
-  })
+  }, [])
 
   return (
     <>

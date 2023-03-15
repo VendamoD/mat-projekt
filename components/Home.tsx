@@ -20,7 +20,7 @@ export function Homepage() {
 
   useEffect(() => {
     getUserData()
-  })
+  }, [])
 
   return (
     <>
