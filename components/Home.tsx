@@ -19,8 +19,11 @@ export function Homepage() {
   }
 
   useEffect(() => {
-    getUserData()
-  }, [])
+    if (isLoggedIn) {
+      getUserData()
+    }
+
+  }, [getUserData])
 
   return (
     <>
