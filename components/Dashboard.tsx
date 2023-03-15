@@ -34,9 +34,7 @@ export function Dashboard() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getUserData()
-    }
+    getUserData()
   })
 
   return (

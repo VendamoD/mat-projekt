@@ -19,9 +19,7 @@ export function Homepage() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getUserData()
-    }
+    getUserData()
   })
 
   return (
@@ -34,7 +32,7 @@ export function Homepage() {
               userData ? userData.SaberPuzzle ? "Hotovo" : "" : ""
             }
             <Center>
-              <Image width="20vw" src="lightsaberThumbnail.jpg" />
+              <Image alt="" width="20vw" src="lightsaberThumbnail.jpg" />
             </Center>
             <Text>Světelné meče</Text>
           </LinkBox>
@@ -46,7 +44,7 @@ export function Homepage() {
               userData ? userData.WolfAndGoatPuzzle ? "Hotovo" : "" : ""
             }
             <Center>
-              <Image width="15vw" float="left" src="GoatAndWolf.png" />
+              <Image alt="" width="15vw" float="left" src="GoatAndWolf.png" />
             </Center>
             <Text>Vlk, koza a zelí</Text>
           </LinkBox>
@@ -58,7 +56,7 @@ export function Homepage() {
               userData ? userData.PentominoPuzzle ? "Hotovo" : "" : ""
             }
             <Center>
-              <Image width="20vw" src="pentominoThumbnail.png" />
+              <Image alt="" width="20vw" src="pentominoThumbnail.png" />
             </Center>
             <Text>Pentomino hlavolam</Text>
           </LinkBox>
@@ -70,7 +68,7 @@ export function Homepage() {
               userData ? userData.EternityPuzzle ? "Hotovo" : "" : ""
             }
             <Center>
-              <Image width="20vw" src="eternityThumbnail.png" />
+              <Image alt="" width="20vw" src="eternityThumbnail.png" />
             </Center>
             <Text>Eternity hlavolam</Text>
           </LinkBox>
