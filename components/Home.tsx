@@ -9,21 +9,14 @@ export function Homepage() {
   const { getData } = useUserContext()
   const [userData, setUserData] = useState()
 
-  if (!isLoggedIn) {
-    return <Login />
-
-  }
   async function getUserData() {
     const userData: any = await getData()
     setUserData(userData);
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getUserData()
-    }
-
-  }, [getUserData])
+    getUserData()
+  }, [getUserData()])
 
   return (
     <>

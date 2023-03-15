@@ -15,16 +15,12 @@ import NextLink from "next/link"
 import Login from "../pages/Login"
 
 export function Dashboard() {
-  //const [error, setError] = useState("")
   const { logout } = useUserContext()
   const { getUser } = useUserContext()
   const { isLoggedIn } = useUserContext()
   const [userData, setUserData] = useState()
   const [userEmail, setUserEmail] = useState()
 
-  if (!isLoggedIn) {
-    return <Login />
-  }
   async function getUserData() {
     if (isLoggedIn) {
       const userData: any = await getUser()
@@ -34,11 +30,8 @@ export function Dashboard() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getUserData()
-    }
-
-  }, [getUserData])
+    getUserData()
+  }, [getUserData()])
 
   return (
     <>
