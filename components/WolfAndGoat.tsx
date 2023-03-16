@@ -28,7 +28,8 @@ export function WolfAndGoat() {
     let alreadyPlaying = false
     let playerSide = "left"
 
-    const modalLost = useDisclosure()
+    const modalLostByGoat = useDisclosure()
+    const modalLostByWolf = useDisclosure()
     const modalWin = useDisclosure()
     const { updateWolfAndGoat } = useUserContext()
 
@@ -152,12 +153,12 @@ export function WolfAndGoat() {
                 console.log("game continues")
             } else if (playerSide == "left" && leftSide.includes("goat") && leftSide.includes("wolf") || playerSide == "left" && leftSide.includes("goat") && leftSide.includes("cabbage")) {
                 console.log("game continues")
-            } else if (leftSide.includes("wolf") && leftSide.includes("goat") || leftSide.includes("goat") && leftSide.includes("cabbage")) {
+            } else if (leftSide.includes("wolf") && leftSide.includes("goat") || rightSide.includes("wolf") && rightSide.includes("goat")) {
                 console.log("game failed")
-                modalLost.onOpen()
-            } else if (rightSide.includes("wolf") && rightSide.includes("goat") || rightSide.includes("goat") && rightSide.includes("cabbage")) {
+                modalLostByWolf.onOpen()
+            } else if ( leftSide.includes("goat") && leftSide.includes("cabbage") || rightSide.includes("goat") && rightSide.includes("cabbage")) {
                 console.log("game failed")
-                modalLost.onOpen()
+                modalLostByGoat.onOpen()
             }
         }
         if (rightSide.includes("goat") && rightSide.includes("wolf") && rightSide.includes("cabbage")) {
@@ -185,7 +186,8 @@ export function WolfAndGoat() {
 
     function close() {
         modalWin.onClose();
-        modalLost.onClose()
+        modalLostByGoat.onClose()
+        modalLostByWolf.onClose()
         restart()
     }
 
@@ -229,10 +231,27 @@ export function WolfAndGoat() {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            <Modal closeOnOverlayClick={false} isOpen={modalLost.isOpen} onClose={modalLost.onClose}>
+            <Modal closeOnOverlayClick={false} isOpen={modalLostByGoat.isOpen} onClose={modalLostByGoat.onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Je mi líto. Bohužel jsi nevyřešil hlavolam.</ModalHeader>
+                    <ModalHeader>Koza sežrala zelí!</ModalHeader>
+                    <ModalBody>
+                        Chceš to zkusit znovu?
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} >
+                            <LinkBox as={NextLink} href="./Home">
+                                NE
+                            </LinkBox>
+                        </Button>
+                        <Button variant='ghost' onClick={() => close()}>ANO</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            <Modal closeOnOverlayClick={false} isOpen={modalLostByWolf.isOpen} onClose={modalLostByWolf.onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Vlk sežral kozu!</ModalHeader>
                     <ModalBody>
                         Chceš to zkusit znovu?
                     </ModalBody>

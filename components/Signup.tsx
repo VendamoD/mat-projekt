@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
+import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link, ListItem, List, UnorderedList } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 
 export function Signup() {
-  //const signup = useAuth(signup => signup.signup)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
@@ -40,6 +39,9 @@ export function Signup() {
           </FormControl>
           <FormControl>
             <FormLabel>Heslo</FormLabel>
+            <UnorderedList>
+              <ListItem>Heslo musí obsahovat minimálně 6 znaků</ListItem>
+            </UnorderedList>
             <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
           <Button backgroundColor="blue.300" onClick={async (e) => {

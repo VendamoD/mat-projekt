@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
+import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link, ListItem, UnorderedList } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import { useRouter } from 'next/router'
 
@@ -42,6 +42,9 @@ export function PasswordChange() {
                         </ChakraAlert> : ""
                     }
                     <FormLabel>Zadej nové heslo</FormLabel>
+                    <UnorderedList>
+                        <ListItem fontSize={{base: "16px"}}>Heslo musí obsahovat minimálně 6 znaků</ListItem>
+                    </UnorderedList>
                     <Input id="password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} isRequired />
                     <Center>
                         <Button backgroundColor="blue.300" onClick={async (e) => {
