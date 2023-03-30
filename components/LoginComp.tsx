@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
+import React, { useState } from "react"
+import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import { useRouter } from 'next/router'
 
@@ -25,8 +25,6 @@ export function LoginComp() {
         <FormControl paddingTop={5}>
           <FormLabel>Email</FormLabel>
           <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-        </FormControl>
-        <FormControl>
           <FormLabel>Heslo</FormLabel>
           <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
         </FormControl>
@@ -45,6 +43,12 @@ export function LoginComp() {
           Nemáš ještě vytvořený účet?{' '}
           <Link color='blue.500' href='./Register'>
             Registruj se zde
+          </Link>
+        </Text>
+        <Text>
+          Zapomněl jsi heslo?{' '}
+          <Link color='blue.500' href='./ResetPassword'>
+            Resetuj si heslo.
           </Link>
         </Text>
       </Stack>

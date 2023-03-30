@@ -13,13 +13,3 @@ const firebaseconfig = {
 }
   
 export const app = initializeApp(firebaseconfig);
-
-// export function handler(req, res) {
-
-//     const userRef = doc(db, "User", "DP1qY7leNLUmkpQAtVUR");
-//     updateDoc(userRef, {
-//         GameStatus: true
-//     }); 
-
-//     res.json({response: "ok"})
-// }

@@ -1,20 +1,14 @@
 import React, { useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link, ListItem, List, UnorderedList } from "@chakra-ui/react"
+import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, Input, Button, Center, Stack, Link, ListItem, UnorderedList } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 
 export function Signup() {
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("")
   const { register } = useUserContext()
   const [isError, setIsError] = useState(false)
   const [isSent, setIsSent] = useState(false)
-
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    register(email, password)
-  }
 
   return (
     <>
@@ -34,19 +28,19 @@ export function Signup() {
             </ChakraAlert> : ""
           }
           <FormControl paddingTop={5}>
+            <FormLabel>Jméno</FormLabel>
+            <Input type='text' value={username} isRequired onChange={(e) => setUsername(e.target.value)} />
             <FormLabel>Email</FormLabel>
-            <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-          </FormControl>
-          <FormControl>
+            <Input type='email' value={email} isRequired onChange={(e) => setEmail(e.target.value)} />
             <FormLabel>Heslo</FormLabel>
             <UnorderedList>
               <ListItem>Heslo musí obsahovat minimálně 6 znaků</ListItem>
             </UnorderedList>
-            <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input type='password' value={password} isRequired onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
           <Button backgroundColor="blue.300" onClick={async (e) => {
             e.preventDefault();
-            const loginErr = await register(email, password)
+            const loginErr = await register(email, password, username)
             console.log(loginErr)
             if (!loginErr) {
               setIsError(true);

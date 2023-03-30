@@ -1,3 +1,4 @@
+//všechny dílky "pentomino"
 const allPentominos = [
     [
         [0, 0, 0, 0, 0],
@@ -86,7 +87,7 @@ const allPentominos = [
 ]
 
 export default allPentominos;
-
+//hrací plocha
 export const emptyPlayarea = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -94,18 +95,15 @@ export const emptyPlayarea = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
-
-
+//kontrola jestli se dílek vejde do pole a jestli se nepřekrývá s jiným dílkem
 export function canPlacePentomino(playArea: number[][], pentomino: number[][], x: number, y: number) {
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             if (pentomino[i][j] === 1) {
-                // Check that the pentomino fits within the bounds of the playArea
                 if (i - 2 + x < 0 || i - 2 + x >= playArea.length || j - 2 + y < 0 || j - 2 + y >= playArea[0].length) {
                     console.log("doesnt fit area")
                     return false;
                 }
-                // Check that the pentomino does not overlap with any other pentominoes
                 if (playArea[i - 2 + x][j - 2 + y] > 0) {
                     console.log("collides")
                     return false;
@@ -115,7 +113,7 @@ export function canPlacePentomino(playArea: number[][], pentomino: number[][], x
     }
     return true;
 }
-
+//otočíme pentomino
 export function rotatePentomino(pentomino: number[][]): number[][] {
     const n = pentomino.length;
     for (let i = 0; i < n / 2; i++) {

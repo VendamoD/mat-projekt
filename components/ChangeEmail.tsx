@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link } from "@chakra-ui/react"
+import React, { useEffect, useState } from "react"
+import { Alert as ChakraAlert, AlertDescription, AlertIcon, AlertTitle, FormLabel, Input, Button, Center, Stack } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
-import { useRouter } from 'next/router'
 
 export function EmailChange() {
-    const [error, setError] = useState("")
     const { changeEmail } = useUserContext()
     const { getUser } = useUserContext()
     const { isLoggedIn } = useUserContext()
@@ -17,22 +15,21 @@ export function EmailChange() {
         if (isLoggedIn) {
             const userData: any = await getUser()
             setUserData(userData);
-
         }
     }
-
+    
     useEffect(() => {
         if (isLoggedIn) {
             getUserData()
         }
-    }, [isLoggedIn])
+    }, [])
 
 
     return (
         <>
             <Center>
                 <Stack min-width="235px" paddingTop={10}>
-                    {
+                    { //Pokud nastane error zobrazí chybovou hlášku
                         isSent ? isError ? <ChakraAlert marginTop={4} status='error'>
                             <AlertIcon />
                             <AlertTitle >Změna emailu neproběhla úspěšně.</AlertTitle>

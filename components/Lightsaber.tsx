@@ -3,9 +3,7 @@ import {
     Tooltip,
     Button,
     Card,
-    CardHeader,
     CardBody,
-    CardFooter,
     Text,
     HStack,
     Modal,
@@ -14,7 +12,6 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
     LinkBox,
     useDisclosure,
     Image,
@@ -70,7 +67,6 @@ export function Lightsaber() {
 
         if (moznostVlevo && moznostVpravo && hodnoty[id] == 1) {
             popupSmer.style.display = "block";
-            //console.log(popupSmer)
             return;
         } else {
             popupSmer.style.display = "none";
@@ -167,7 +163,6 @@ export function Lightsaber() {
                     popupNemuzes.style.display = "none"
                     popupSmer.style.display = "none"
                     modalLost.onOpen()
-                    //console.log("Jiz nemuzes hnout s zadnou sirkou");
                     break;
                 }
             }

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import NextLink from "next/link"
-import { Box, Image, LinkBox, Text, HStack, Grid, Modal, ModalContent, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure, TagRightIcon, Center, Tooltip } from "@chakra-ui/react"
+import { Box, Image, LinkBox, Grid, Modal, ModalContent, ModalOverlay, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Center, Tooltip } from "@chakra-ui/react"
 import { useUserContext } from './userContext'
 import { QuestionOutlineIcon } from "@chakra-ui/icons"
 
+//funkce jejíž pomocí zjišťujeme sousední dílky od našeho položeného dílku
 function getNeighbours(x: number, y: number, playarea: number[][]) {
   return {
     top: (playarea[x - 1] ?? [])[y],
@@ -12,7 +13,7 @@ function getNeighbours(x: number, y: number, playarea: number[][]) {
     right: playarea[x][y + 1]
   }
 }
-
+//tato funkce otočí dílek a jeho hodnoty
 function rotate(x: Omit<EternityVal, "placed">) {
   const right = x.right
   const top = x.top
@@ -380,15 +381,20 @@ const eternityVals: Omit<EternityVal, "rotated" | "placed">[] = [
     bottom: 0
   },
 ]
+
+//funkce pro zamíchání dílků, aby nebyli zobrazeny na stránce ve správném pořadí a také je náhodně otočíme
 function randomizeEternities(): EternityVal[] {
   const x = eternityVals.sort(() => Math.random() - 0.5).map(x => ({ ...x, rotated: 0 }));
   const rnds = eternityVals.map(x => Math.floor(Math.random() * 4));
+
   x.forEach((x, i) => {
     for (let j = 0; j < rnds[i]; j++) {
       rotate(x)
     }
   })
-  return x.map((x, i) => ({
+
+  //vrátíme všechny otočené dílky
+  return x.map((x) => ({
     ...x,
     placed: false
   }));
@@ -414,6 +420,7 @@ export function Eternity() {
     event.dataTransfer.setData('text', event.currentTarget.id)
   }
 
+  //funkce kde projdeme celé pole playArea a zkontrolujeme jestli hráč dokončil hlavolam nebo ne
   function checkResult(playArea: number[][]) {
     let isFinished = true;
     for (let i = 0; i < playArea.length; i++) {
@@ -423,6 +430,7 @@ export function Eternity() {
         }
       }
     }
+    //pokud hlavolam dokončil, tak updateEternity změní uživately v databází status hlavolamu na splněný a potom otevřeme hlášku s gratulací pro hráče
     if (isFinished) {
       updateEternity()
       onOpen()
@@ -432,8 +440,10 @@ export function Eternity() {
 
   function keyDown(e: React.KeyboardEvent<HTMLDivElement>, x: EternityVal) {
     if (e.key == "r") {
+      //najdeme náš dílek
       const et = eternities.find(e => e.id == x.id)
       if (!et) return;
+      //otočíme dílek
       rotate(et);
       setEternities([...eternities])
     }
@@ -441,10 +451,12 @@ export function Eternity() {
   }
 
   function takeOut(cell: number) {
+    //najdeme dílek
     const et = eternities.find(x => x.id == cell)
     if (!et) return;
     et.placed = false
     setEternities([...eternities]);
+    //projdeme playArea a kde najdeme náš dílek, tak nastavíme hodnotu 0, aby to místo nebylo dále obsazené
     for (let i = 0; i < playArea.length; i++) {
       for (let y = 0; y < playArea[i].length; y++) {
         if (playArea[i][y] == cell) {
@@ -456,7 +468,6 @@ export function Eternity() {
   }
 
   function restart() {
-    //const et = eternities.find(e => e.id == x.id)?.id
     setPlayArea([
       [0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0],
@@ -476,7 +487,7 @@ export function Eternity() {
       const et = eternities.find(x => x.id == id)
       if (!et) return;
       const neighbors = getNeighbours(rowIndex, i, playArea)
-
+      //ověříme strany dílku jestli se shodují se strany sousedících dílků
       if (neighbors.top && eternities.find(x => x.id == neighbors.top)?.bottom !== et.top) return;
       if (neighbors.left && eternities.find(x => x.id == neighbors.left)?.right !== et.left) return;
       if (neighbors.right && eternities.find(x => x.id == neighbors.right)?.left !== et.right) return;
@@ -501,11 +512,13 @@ export function Eternity() {
     <>
       <Center>
         <Grid paddingTop={5} id="gridEternity" style={{ gridTemplateColumns: `repeat(${playArea[0].length}, 50px)`, gridTemplateRows: `repeat(${playArea.length}, 50px)` }}>
-          {playArea.map((row, rowIndex) => row.map((cell, i) => (
+          { // vytvoříme hrací plochu
+          playArea.map((row, rowIndex) => row.map((cell, i) => (
             <Box key={i} id={`${cell}`} draggable="true"
               className="block"
               onDrop={drop(rowIndex, i)}
               onDragStart={dragStart}
+              //při stisku pravého tlačítka vyjmeme dílek
               onContextMenu={(e) => {
                 e.preventDefault()
                 takeOut(cell)

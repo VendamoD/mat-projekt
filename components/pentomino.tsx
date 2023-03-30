@@ -8,7 +8,6 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
     useDisclosure,
     LinkBox,
     HStack,
@@ -32,7 +31,7 @@ export function Pentomino() {
     const [[x, y], setOver] = useState([-1, -1]);
 
     const { updatePentomino } = useUserContext()
-
+    //funkce pro kontrolu stavu hry, projdeme všechny hodnoty v poli playArea a pokud jsou všechny větší než 0, tak hrář splnil hlavolam
     function checkGame(playArea: number[][]) {
         var found = false
         for (let i = 0; i < playArea.length; i++) {
@@ -43,11 +42,11 @@ export function Pentomino() {
             }
         }
         if (!found) {
-            console.log("Game won")
             updatePentomino()
             modal.onOpen()
         }
     }
+    //podle toho jakou klávesu uživatel zmáčkl otočíme nebo překlopíme dílek
     function keyDown(e: React.KeyboardEvent<HTMLDivElement>, index: number) {
         if (e.key == "r") {
             setPentominoes([...pentominoes.slice(0, index), rotatePentomino(pentominoes[index]), ...pentominoes.slice(index + 1)])
@@ -57,6 +56,7 @@ export function Pentomino() {
         }
     }
 
+    //překlopíme dílek
     function flip(pentomino: number[][]) {
         pentomino.reverse()
         return pentomino
@@ -70,12 +70,11 @@ export function Pentomino() {
         setOver([-1, -1])
         setSelectedPentomino(0)
     }
-
+    //při každé změně playArea zkontrolujeme jestli hráč nevyřešil hlavolam
     useEffect(() => {
-        console.table(playArea)
         checkGame(playArea)
     }, [playArea])
-
+    //funkce pro položení pentomina
     function applyPentomino(area: number[][], pentomino: number[][], value: number) {
         for (let i = 0; i < 5; i++) {
             for (let j = 0; j < 5; j++) {
@@ -85,7 +84,7 @@ export function Pentomino() {
         }
         return area;
     }
-
+    //funkce, která kontroluje jestli se dílek podle souřadnic vejde do pole a jestli má pentomino hodnotu 1
     function tryPlacePentomino(real: boolean) {
         if (real) setSelectedPentomino(0);
         if (x < 0) return;
@@ -93,14 +92,12 @@ export function Pentomino() {
         if (selectedPentomino < 1) return;
 
         const pentomino = pentominoes[selectedPentomino - 1];
-
+        //pokud můžu položit pentomino, tak ho položíme do pole
         if (canPlacePentomino(playArea, pentomino, x, y)) {
             var area = applyPentomino(playArea.map(x => [...x]), pentomino, selectedPentomino);
 
             if (real) {
-                console.log("placing")
                 setPlayArea(area)
-
                 pentonimoUsed[selectedPentomino - 1] = true
                 setPentonimoUsed([...pentonimoUsed])
                 setOver([-1, -1]);
@@ -108,13 +105,10 @@ export function Pentomino() {
             setDisplayArea(area)
         }
     }
-
+    //funkce která přesunuje pentomino z jedné už položené pozice na jinou
     function movePentomino(x: number, y: number, pentominoValue: number) {
         if (pentominoValue <= 0) return;
         if (selectedPentomino > 0) return;
-
-        console.log('moving', pentominoValue)
-
         setSelectedPentomino(pentominoValue)
 
         const newPlayarea = playArea.map(x => x.map(y => y == pentominoValue ? 0 : y));
@@ -126,21 +120,20 @@ export function Pentomino() {
 
         setOver([x, y]);
     }
-
+    //vybereme si pentomino
     function select(i: number) {
         if (selectedPentomino > 0) return;
         setSelectedPentomino(i)
     }
-
+    //při změně souřadnic dílku se volá useEffect, který kontroluje jestli nejsou souřadnice mimo hranice pole nebo obsazený dílek
     useEffect(() => {
-        console.log(x, y, selectedPentomino)
         setDisplayArea(playArea);
         if (x < 0) return;
         if (y < 0) return;
         if (selectedPentomino < 1) return;
         tryPlacePentomino(false)
     }, [x, y])
-
+    //zavření okna s gratulací
     function close() {
         modal.onClose()
         reset()

@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react"
-import { Alert as ChakraAlert, Text, AlertDescription, AlertIcon, AlertTitle, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button, Center, Stack, Link, ListItem, UnorderedList } from "@chakra-ui/react"
+import React, { useEffect, useState } from "react"
+import { Alert as ChakraAlert, AlertDescription, AlertIcon, AlertTitle, FormLabel, Input, Button, Center, Stack, ListItem, UnorderedList } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
-import { useRouter } from 'next/router'
 
 export function PasswordChange() {
-    const [error, setError] = useState("")
     const { changePassword } = useUserContext()
     const { getUser } = useUserContext()
     const { isLoggedIn } = useUserContext()
@@ -49,6 +47,7 @@ export function PasswordChange() {
                     <Center>
                         <Button backgroundColor="blue.300" onClick={async (e) => {
                             e.preventDefault()
+                            //zavoláme funkci která změní heslo uživatele v databázi
                             const emailChangeErr = await changePassword(newPassword)
                             if (!emailChangeErr) {
                                 setIsError(true)

@@ -4,15 +4,12 @@ import {
     Image,
     Button,
     HStack,
-    Card,
-    Text,
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton,
     LinkBox,
     useDisclosure,
     Tooltip,
@@ -32,7 +29,7 @@ export function WolfAndGoat() {
     const modalLostByWolf = useDisclosure()
     const modalWin = useDisclosure()
     const { updateWolfAndGoat } = useUserContext()
-
+    //přesuneme loď s vlkem na druhou stranu
     function moveWolf() {
         const wolf = document.getElementById("wolf") as HTMLImageElement
         const boat = document.getElementById("boat") as HTMLImageElement
@@ -65,6 +62,7 @@ export function WolfAndGoat() {
         alreadyPlaying = true
         checkGame()
     }
+    //přesuneme loď se zelím na druhou stranu
     function moveCabbage() {
         const boat = document.getElementById("boat") as HTMLImageElement
         const cabbage = document.getElementById("cabbage") as HTMLImageElement
@@ -98,7 +96,7 @@ export function WolfAndGoat() {
         alreadyPlaying = true
         checkGame()
     }
-
+    //přesuneme loď s kozou na druhou stranu
     function moveGoat() {
         const boat = document.getElementById("boat") as HTMLImageElement
         const goat = document.getElementById("goat") as HTMLImageElement
@@ -131,7 +129,7 @@ export function WolfAndGoat() {
         alreadyPlaying = true
         checkGame()
     }
-
+    //přesuneme loď na druhou stranu bez nákladu
     function moveEmpty() {
         const boat = document.getElementById("boat") as HTMLImageElement
 
@@ -146,7 +144,7 @@ export function WolfAndGoat() {
         checkGame()
         console.log(playerSide)
     }
-
+    //kontrola hlavolamu, jestli hráč vyřešil hlavolam
     function checkGame() {
         if (alreadyPlaying) {
             if (playerSide == "right" && rightSide.includes("goat") && rightSide.includes("wolf") || playerSide == "right" && rightSide.includes("goat") && rightSide.includes("cabbage")) {
@@ -167,7 +165,7 @@ export function WolfAndGoat() {
             modalWin.onOpen()
         }
     }
-
+    //resetování hlavolamu
     function restart() {
         const wolf = document.getElementById("wolf") as HTMLImageElement
         const boat = document.getElementById("boat") as HTMLImageElement
@@ -183,7 +181,7 @@ export function WolfAndGoat() {
         goat.className = "goatLeft"
         boat.className = "boatLeft"
     }
-
+    //zavření okna s hláškou
     function close() {
         modalWin.onClose();
         modalLostByGoat.onClose()
@@ -193,7 +191,6 @@ export function WolfAndGoat() {
 
     return (
         <>
-
             <Box width={"60vw"} position="relative" marginLeft="auto" marginRight="auto" display="block" paddingTop="10px">
                 <Image className="wolfLeft" id="wolf" src="cartoonWolf.png"></Image>
                 <Image className="goatLeft" id="goat" src="cartoonGoat.png" position="absolute"></Image>
@@ -265,6 +262,8 @@ export function WolfAndGoat() {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
+
+            
         </>
     )
 }

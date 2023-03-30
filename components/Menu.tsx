@@ -1,7 +1,6 @@
 import React from "react"
 import NextLink from "next/link"
 import { HStack, LinkBox } from "@chakra-ui/react"
-import { useUserContext } from "./userContext"
 
 export function Menu() {
 

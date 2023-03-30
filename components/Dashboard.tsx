@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react"
 import {
-  Alert as ChakraAlert, Text, Button, Center, Stack, Box, Card, FormControl,
+  Alert as Text, 
+  Button, 
+  Center, 
+  Stack,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Link
 } from "@chakra-ui/react"
 import { useUserContext } from "./userContext"
 import NextLink from "next/link"
-import Login from "../pages/Login"
 
 export function Dashboard() {
   const { logout } = useUserContext()
@@ -31,19 +28,22 @@ export function Dashboard() {
 
   useEffect(() => {
     getUserData()
-  }, [getUserData()])
+  }, [])
 
   return (
     <>
       <Center>
-        <Stack width="235px" paddingTop={10}>
+        <Stack width="18vw" paddingTop={10}>
           <FormLabel>Tvůj současný email:</FormLabel>
           <Input type="text" readOnly value={userEmail || ''}></Input>
-          <Text>
-            Chceš změnit{' '}
-            <Link as={NextLink} color='blue.500' href="./Email" >email{' '}</Link>
-            nebo{' '}
-            <Link as={NextLink} color='blue.500' href="./Password" >heslo</Link>?
+          <Text background="white">
+            Chceš změnit
+            <Link margin={1} as={NextLink} color='blue.500' href="./Email" >email</Link>
+            nebo
+            <Link margin={1} as={NextLink} color='blue.500' href="./Password" >heslo</Link>?
+          </Text>
+          <Text background="white">
+            <Link margin={1} as={NextLink} color='blue.500' href="./ResetPassword">Resetovat heslo</Link>
           </Text>
           <Button backgroundColor="blue.300" onClick={logout}>
             Odhlásit se
