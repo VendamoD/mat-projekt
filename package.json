@@ -19,7 +19,7 @@
     "@types/react-dom": "^18.0.11",
     "eslint": "^8.36.0",
     "eslint-config-next": "^13.2.4",
-    "firebase": "^9.17.2",
+    "firebase": "^10.2.0",
     "firestore": "^1.1.6",
     "framer-motion": "^10.3.1",
     "lodash": "^4.17.21",
